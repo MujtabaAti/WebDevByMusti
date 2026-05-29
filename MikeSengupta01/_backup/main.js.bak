@@ -1,0 +1,295 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Sticky Navbar Effect
+    const header = document.querySelector(".header");
+    window.addEventListener("scroll", () => {
+        if(window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    });
+
+    // 2. Intersection Observer for Fade-In Animations
+    const faders = document.querySelectorAll('.fade-in');
+    
+    const appearOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('appear');
+                appearOnScroll.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+
+    // 3. Counter Animation
+    const counters = document.querySelectorAll('.counter-value');
+    let hasCounted = false;
+
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting && !hasCounted) {
+                hasCounted = true;
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const formatCount = (value) => {
+                        const locale = document.documentElement.lang === 'en' ? 'en-US' : 'de-DE';
+                        const formatted = Math.round(value).toLocaleString(locale);
+                        return counter.classList.contains('plus') ? `${formatted}+` : formatted;
+                    };
+                    const updateCount = () => {
+                        const count = Number(counter.innerText.replace(/\D/g, '')) || 0;
+                        
+                        // Lower inc to slow and higher to speed up
+                        const inc = target / 50;
+
+                        if (count < target) {
+                            counter.innerText = formatCount(Math.min(count + inc, target));
+                            setTimeout(updateCount, 40);
+                        } else {
+                            counter.innerText = formatCount(target);
+                        }
+                    };
+                    updateCount();
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const counterSection = document.querySelector('.results-stats-section');
+    if (counterSection) counterObserver.observe(counterSection);
+    const aboutSection = document.querySelector('.about-counter');
+    if (aboutSection) counterObserver.observe(aboutSection);
+
+    // 4. Instagram Hero Coverflow
+    const instaVitrine = document.querySelector('.insta-vitrine');
+    const instaCards = Array.from(document.querySelectorAll('.insta-card'));
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const desktopQuery = window.matchMedia('(min-width: 993px)');
+    let activeInstaCard = 0;
+    let instaTimer = null;
+
+    function renderInstaCoverflow() {
+        if (!instaCards.length) return;
+
+        instaCards.forEach((card, index) => {
+            const slot = (index - activeInstaCard + instaCards.length) % instaCards.length;
+            card.classList.remove('is-center', 'is-left', 'is-right');
+
+            if (slot === 0) {
+                card.classList.add('is-center');
+            } else if (slot === 1) {
+                card.classList.add('is-right');
+            } else {
+                card.classList.add('is-left');
+            }
+        });
+    }
+
+    function shouldAnimateInsta() {
+        return desktopQuery.matches &&
+            !reducedMotionQuery.matches &&
+            !document.body.classList.contains('a11y-no-animations');
+    }
+
+    function stopInstaCoverflow() {
+        if (!instaTimer) return;
+        clearInterval(instaTimer);
+        instaTimer = null;
+    }
+
+    function startInstaCoverflow() {
+        stopInstaCoverflow();
+        if (!shouldAnimateInsta() || instaCards.length < 2) return;
+
+        instaTimer = setInterval(() => {
+            activeInstaCard = (activeInstaCard + 1) % instaCards.length;
+            renderInstaCoverflow();
+        }, 3600);
+    }
+
+    if (instaVitrine && instaCards.length) {
+        renderInstaCoverflow();
+        startInstaCoverflow();
+
+        instaVitrine.addEventListener('mouseenter', () => {
+            stopInstaCoverflow();
+            renderInstaCoverflow();
+        });
+
+        instaVitrine.addEventListener('mouseleave', startInstaCoverflow);
+
+        [reducedMotionQuery, desktopQuery].forEach(query => {
+            query.addEventListener('change', () => {
+                renderInstaCoverflow();
+                startInstaCoverflow();
+            });
+        });
+
+        new MutationObserver(() => {
+            renderInstaCoverflow();
+            startInstaCoverflow();
+        }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // 5. Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if(mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('open');
+        });
+    }
+
+    // 6. Initialize tsParticles (Network / Spider Web style)
+    if (typeof tsParticles !== 'undefined') {
+        tsParticles.load("tsparticles", {
+            background: { color: { value: "transparent" } },
+                fpsLimit: 60,
+                interactivity: {
+                    events: {
+                        onHover: {
+                            enable: true,
+                            mode: "grab",
+                        },
+                        resize: true,
+                    },
+                    modes: {
+                        grab: {
+                            distance: 200,
+                            links: {
+                                opacity: 0.5,
+                                color: "#d4af37" // Golden links to mouse
+                            }
+                        }
+                    },
+                },
+                particles: {
+                    color: { value: "#d4af37" },
+                    links: {
+                        color: "#d4af37",
+                        distance: 150,
+                        enable: true,
+                        opacity: 0.3,
+                        width: 1,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1.5,
+                        direction: "none",
+                        outModes: "bounce",
+                    },
+                    number: {
+                        density: { enable: true, area: 800 },
+                        value: 50,
+                    },
+                    opacity: { value: 0.4 },
+                    shape: { type: "circle" },
+                    size: { value: 2 },
+                },
+            detectRetina: true,
+        });
+    }
+
+    // 7. Impressum Modal Logic
+    const imprintToggle = document.getElementById("imprint-toggle");
+    const imprintModal = document.getElementById("imprint-modal");
+    const imprintClose = document.getElementById("imprint-close");
+    const imprintOverlay = imprintModal ? imprintModal.querySelector(".modal-overlay") : null;
+
+    if (imprintToggle && imprintModal && imprintClose) {
+        let lastFocusedElement = null;
+
+        const openImprint = (e) => {
+            if (e) e.preventDefault();
+            
+            // Save last focused element
+            lastFocusedElement = document.activeElement;
+
+            // Set dynamic aria-label on close button based on current language
+            const currentLang = document.documentElement.lang || "de";
+            imprintClose.setAttribute(
+                "aria-label", 
+                currentLang === "en" ? "Close Imprint" : "Impressum schließen"
+            );
+
+            // Open Modal
+            imprintModal.classList.add("open");
+            imprintModal.setAttribute("aria-hidden", "false");
+
+            // Focus close button initially
+            imprintClose.focus();
+
+            // Prevent body scroll
+            document.body.style.overflow = "hidden";
+        };
+
+        const closeImprint = () => {
+            imprintModal.classList.remove("open");
+            imprintModal.setAttribute("aria-hidden", "true");
+
+            // Restore body scroll
+            document.body.style.overflow = "";
+
+            // Restore focus
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        };
+
+        imprintToggle.addEventListener("click", openImprint);
+        imprintClose.addEventListener("click", closeImprint);
+        if (imprintOverlay) {
+            imprintOverlay.addEventListener("click", closeImprint);
+        }
+
+        // Escape Key Listener & Focus Trapping
+        document.addEventListener("keydown", (e) => {
+            const isOpen = imprintModal.classList.contains("open");
+            if (!isOpen) return;
+
+            // Close on Escape
+            if (e.key === "Escape") {
+                closeImprint();
+                return;
+            }
+
+            // Trap Focus
+            if (e.key === "Tab") {
+                const focusableElements = imprintModal.querySelectorAll(
+                    'a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+                );
+                if (focusableElements.length > 0) {
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey) {
+                        // Shift + Tab
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        // Tab
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            }
+        });
+    }
+});

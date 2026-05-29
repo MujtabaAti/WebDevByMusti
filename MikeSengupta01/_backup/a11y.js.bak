@@ -1,0 +1,102 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("a11y-toggle");
+    const panel = document.getElementById("a11y-panel");
+    const closeBtn = document.getElementById("a11y-close");
+
+    // Toggles
+    const hcToggle = document.getElementById("a11y-hc");
+    const txtUpToggle = document.getElementById("a11y-txt-up");
+    const txtResetToggle = document.getElementById("a11y-txt-reset");
+    const dysToggle = document.getElementById("a11y-dys");
+    const animToggle = document.getElementById("a11y-anim");
+
+    // Load Prefs with safe try-catch wrapper
+    let isHC = false;
+    let isLarge = false;
+    let isDys = false;
+    let isNoAnim = false;
+
+    try {
+        isHC = localStorage.getItem("a11y_hc") === "true";
+        isLarge = localStorage.getItem("a11y_large") === "true";
+        isDys = localStorage.getItem("a11y_dys") === "true";
+        isNoAnim = localStorage.getItem("a11y_noanim") === "true";
+    } catch (e) {
+        console.warn("localStorage is not accessible:", e);
+    }
+
+    function applyA11y() {
+        if(isHC) document.body.classList.add("a11y-high-contrast");
+        else document.body.classList.remove("a11y-high-contrast");
+
+        document.documentElement.classList.toggle("a11y-large-text", isLarge);
+        document.body.classList.toggle("a11y-large-text", isLarge);
+
+        if(isDys) document.body.classList.add("a11y-dyslexia");
+        else document.body.classList.remove("a11y-dyslexia");
+
+        if(isNoAnim) document.body.classList.add("a11y-no-animations");
+        else document.body.classList.remove("a11y-no-animations");
+
+        // Button States
+        updateBtnState(hcToggle, isHC);
+        updateBtnState(txtUpToggle, isLarge);
+        updateBtnState(txtResetToggle, !isLarge);
+        updateBtnState(dysToggle, isDys);
+        updateBtnState(animToggle, isNoAnim);
+    }
+
+    function updateBtnState(btn, state) {
+        if(!btn) return;
+        if(state) btn.classList.add("active");
+        else btn.classList.remove("active");
+        btn.setAttribute("aria-pressed", state ? "true" : "false");
+    }
+
+    applyA11y();
+
+    // Toggle Panel
+    if(toggleBtn && panel && closeBtn) {
+        toggleBtn.addEventListener("click", () => {
+            const isOpen = panel.getAttribute("aria-hidden") === "false";
+            panel.setAttribute("aria-hidden", !isOpen);
+            toggleBtn.setAttribute("aria-expanded", !isOpen);
+            if(!isOpen) panel.classList.add("open");
+            else panel.classList.remove("open");
+        });
+
+        closeBtn.addEventListener("click", () => {
+            panel.setAttribute("aria-hidden", "true");
+            toggleBtn.setAttribute("aria-expanded", "false");
+            panel.classList.remove("open");
+            toggleBtn.focus();
+        });
+    }
+
+    // Handlers with safe localStorage writes
+    if(hcToggle) hcToggle.addEventListener("click", () => { 
+        isHC = !isHC; 
+        try { localStorage.setItem("a11y_hc", String(isHC)); } catch(e) {}
+        applyA11y(); 
+    });
+    if(txtUpToggle) txtUpToggle.addEventListener("click", () => { 
+        isLarge = true; 
+        try { localStorage.setItem("a11y_large", "true"); } catch(e) {}
+        applyA11y(); 
+    });
+    if(txtResetToggle) txtResetToggle.addEventListener("click", () => { 
+        isLarge = false; 
+        try { localStorage.setItem("a11y_large", "false"); } catch(e) {}
+        applyA11y(); 
+    });
+    if(dysToggle) dysToggle.addEventListener("click", () => { 
+        isDys = !isDys; 
+        try { localStorage.setItem("a11y_dys", String(isDys)); } catch(e) {}
+        applyA11y(); 
+    });
+    if(animToggle) animToggle.addEventListener("click", () => { 
+        isNoAnim = !isNoAnim; 
+        try { localStorage.setItem("a11y_noanim", String(isNoAnim)); } catch(e) {}
+        applyA11y(); 
+    });
+});

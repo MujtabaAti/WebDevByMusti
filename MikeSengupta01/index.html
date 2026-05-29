@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mike Sengupta - Personal Coach. Verwandle Deine Vision in Realität.">
+    <title>Mike Sengupta | Personal Coaching</title>
+    <!-- SECURITY FIX: localStorage-Wert validieren vor Verwendung -->
+    <script>
+        try {
+            const val = localStorage.getItem("a11y_large");
+            if (val === "true") {
+                document.documentElement.classList.add("a11y-large-text");
+            }
+        } catch (e) {}
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- SECURITY FIX: FontAwesome mit SRI-Hash -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Background Particles Canvas -->
+    <div id="tsparticles"></div>
+    <!-- Skip to Content -->
+    <a href="#main-content" class="skip-link" data-i18n="a11y.skip">Zum Hauptinhalt springen</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <a href="#home" class="logo"><img src="images/logo.png" alt="Mike Sengupta Premium Coaching"></a>
+
+        <nav role="navigation" aria-label="Main Navigation">
+            <ul class="nav-links">
+                <li><a href="#about" data-i18n="nav.about">Über mich</a></li>
+                <li><a href="#services" data-i18n="nav.services">Leistungen</a></li>
+                <li><a href="#results" data-i18n="nav.results">Ergebnisse</a></li>
+                <li><a href="#why-me" data-i18n="nav.why_me">Warum Ich</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+                <!-- SECURITY FIX: rel="noopener noreferrer" für alle target="_blank" Links -->
+                <li><a href="https://www.linkedin.com/in/mike-sen-gupta-a03741b/" target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-icon text-gold" style="font-size: 1.2rem; margin-right: 0.5rem;"><i
+                            class="fa-brands fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/coach_mike1980hh/" target="_blank" rel="noopener noreferrer"
+                        class="social-icon text-gold" style="font-size: 1.2rem;"><i class="fa-brands fa-instagram"></i></a></li>
+
+                <li class="lang-switch">
+                    <span class="lang-lbl de">DE</span>
+                    <label class="switch">
+                        <input type="checkbox" id="lang-toggle" aria-label="Toggle Language">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="lang-lbl en">EN</span>
+                </li>
+            </ul>
+        </nav>
+
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false"><i
+                class="fa-solid fa-bars"></i></button>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="main-content" role="main">
+        <section class="hero fade-in" id="home">
+            <div class="hero-content">
+                <span class="hero-subtitle" data-i18n="hero.subtitle">Dein Personal</span>
+                <div class="urgency-badge" data-i18n="hero.urgency">
+                </div>
+                <h1 data-i18n="hero.title">Verwandle Deine Vision In Realität</h1>
+                <p data-i18n="hero.description">Mit über 20 Jahren Erfahrung als Trainer helfe ich Dir, Deine Traumfigur
+                    zu
+                    erreichen und Deine Grenzen zu sprengen.</p>
+                <a href="#contact" class="btn-primary" data-i18n="hero.cta">Kostenloses Erstgespräch</a>
+            </div>
+            <div class="hero-showcase" aria-label="Instagram Transformationen">
+                <div class="insta-vitrine">
+                    <div class="insta-rotation">
+                        <div class="transformation-card insta-card is-center">
+                            <img src="images/transformation1.jpg" alt="E. (25) Transformation" class="transformation-img" loading="lazy">
+                            <p data-i18n="transformations.caption1">E. (25): Fettverlust & Muskelaufbau</p>
+                        </div>
+                        <div class="transformation-card insta-card is-right">
+                            <img src="images/transformation2.jpg" alt="Musti A. (15) Transformation" class="transformation-img" loading="lazy">
+                            <p data-i18n="transformations.caption2">Musti (15): 52 Wochen Transformation</p>
+                        </div>
+                        <div class="transformation-card insta-card is-left">
+                            <img src="images/transformation3.jpg" alt="Marian Transformation" class="transformation-img" loading="lazy">
+                            <p data-i18n="transformations.caption3">Marian: 39 Wochen Transformation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about fade-in" id="about">
+            <div class="about-image">
+                <img src="images/coach_real.jpg" alt="Mike Sengupta">
+            </div>
+            <div class="about-content">
+                <h2 data-i18n="about.section_title">Dein Coach</h2>
+                <p data-i18n="about.intro">Leidenschaftlicher Personal Trainer mit überdurchschnittlicher Erfahrung in
+                    den Bereichen Körperfettreduktion, Muskelaufbau, Training nach Verletzungen. Meine Motivation ist
+                    dein Erfolg!</p>
+
+                <div class="about-counter fade-in">
+                    <div class="counter-box">
+                        <h4 class="counter-value plus" data-target="20">20+</h4>
+                        <span data-i18n="about.exp_title">Jahre Erfahrung</span>
+                    </div>
+                    <div class="counter-box">
+                        <h4><i class="fa-solid fa-medal text-gold"></i></h4>
+                        <span data-i18n="about.club">Trainer beim VfL Pinneberg</span>
+                    </div>
+                    <div class="counter-box">
+                        <h4 class="counter-value plus" data-target="1000">1.000+</h4>
+                        <span data-i18n="about.clients_supported">Kunden betreut</span>
+                    </div>
+                    <div class="counter-box">
+                        <h4 class="counter-value plus" data-target="10000">10.000+</h4>
+                        <span data-i18n="about.training_hours">Trainingsstunden begleitet</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-licenses fade-in">
+                <span class="license-kicker" data-i18n="about.licenses_kicker">Qualifikationen</span>
+                <h3 data-i18n="about.licenses_title">Lizenzen & Expertise</h3>
+                <ul class="license-list" aria-label="Qualifikationen und Lizenzen">
+                    <li class="license-item">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                        <span data-i18n="about.license_personal">lizenzierter Personal Trainer</span>
+                        <small data-i18n="about.license_personal_meta">Bundesverband PT</small>
+                    </li>
+                    <li class="license-item">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                        <span data-i18n="about.license_manager">lizenzierter Fitness-Manager</span>
+                    </li>
+                    <li class="license-item">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                        <span data-i18n="about.license_bodycomp">Experte bei „Fett runter – Muskeln rauf“</span>
+                        <small data-i18n="about.license_bodycomp_meta">Veränderung der Bodycomp</small>
+                    </li>
+                    <li class="license-item">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                        <span data-i18n="about.license_ypsi">YPSI B-Lizenz</span>
+                    </li>
+                    <li class="license-item">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                        <span data-i18n="about.license_nutrition">Ernährungscoaching</span>
+                    </li>
+                    <li class="license-item">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i>
+                        <span data-i18n="about.license_rehab">lizenzierter Reha-Trainer bei orthopädischen Verletzungen</span>
+                        <small data-i18n="about.license_rehab_meta">Rehasportverband</small>
+                    </li>
+                    <li class="license-item license-item-muted">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        <span data-i18n="about.license_more">und weitere Lizenzen …</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services fade-in" id="services">
+            <h2 data-i18n="services.title">Meine Leistungen</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-dumbbell"></i>
+                    <h3 data-i18n="services.card1.title">Personal Training</h3>
+                    <p data-i18n="services.card1.desc">Individuelle 1:1 Betreuung für maximale Ergebnisse und korrekte
+                        Ausführung.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <h3 data-i18n="services.card2.title">Reha-Training</h3>
+                    <p data-i18n="services.card2.desc">Sicherer Aufbau nach Verletzungen für eine vollständige
+                        Wiederherstellung der Leistungsfähigkeit.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-apple-whole"></i>
+                    <h3 data-i18n="services.card3.title">Ernährungsberatung</h3>
+                    <p data-i18n="services.card3.desc">Maßgeschneiderte Pläne, die sich nahtlos in Deinen Alltag
+                        integrieren
+                        lassen.</p>
+                </div>
+            </div>
+            <div style="margin-top: 3rem;">
+                <a href="#contact" class="btn-primary" data-i18n="services.cta">Sichere Dir Deinen Platz</a>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results fade-in results-stats-section" id="results">
+            <h2 data-i18n="results.title">Transformationen</h2>
+            <p style="max-width: 600px; margin: 0 auto; color: var(--text-secondary);" data-i18n="results.desc">
+                Ergebnisse
+                sprechen für sich. Schließe dich den vielen Kunden an, die ihre Traumkörper erreicht haben.</p>
+
+            <div class="results-grid">
+                <div class="stat-item">
+                    <h3 class="counter-value plus" data-target="500">0</h3>
+                    <p data-i18n="results.stat1.title">Zufriedene Kunden</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter-value plus" data-target="2500">0</h3>
+                    <p data-i18n="results.stat2.title">Verlorene Kilos</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter-value plus" data-target="1200">0</h3>
+                    <p data-i18n="results.stat3.title">Aufgebaute Muskelmasse</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Me -->
+        <section class="why-me fade-in" id="why-me">
+            <div class="why-content">
+                <h2 data-i18n="why.title">Warum Du Mich Wählen Solltest</h2>
+                <ul class="why-list">
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="why.point1">A-Lizenz Trainer</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="why.point2">Zertifizierter
+                            Reha-Trainer</span>
+                    </li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="why.point3">Nachweisliche Erfolge</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="why.point4">Höchste Motivation &
+                            Disziplin</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Transformations Section -->
+        <section class="transformations fade-in" id="transformations">
+            <h2 data-i18n="transformations.title" style="text-align: center; margin-bottom: 3rem;">Echte Ergebnisse.
+                Echte
+                Menschen.</h2>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#contact" class="btn-primary" data-i18n="transformations.cta">Starte Deine Transformation</a>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta fade-in">
+            <h2 data-i18n="cta.title">Bereit für den ersten Schritt?</h2>
+            <p class="urgency-text" data-i18n="cta.urgency">Die Zeit läuft. Sichere dir eine der letzten Kapazitäten für
+                mein Coaching.</p>
+            <p data-i18n="cta.subtitle">Warte nicht auf den perfekten Moment. Erschaffe ihn.</p>
+            <a href="#contact" class="btn-primary" data-i18n="cta.button">Jetzt Starten</a>
+        </section>
+
+
+
+        <!-- Contact Form Section -->
+        <section class="contact fade-in" id="contact">
+            <div class="form-container"
+                style="text-align: center; padding: 3rem; background: var(--bg-color); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                <h2 data-i18n="contact.title" style="margin-bottom: 1rem;">Coaching Bewerbung</h2>
+                <p data-i18n="contact.desc"
+                    style="margin-bottom: 3rem; color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Fülle das Formular aus, damit ich verstehe, wo dein Ziel liegt und ob ich der richtige Coach für
+                    dich
+                    bin.</p>
+                <!-- SECURITY FIX: rel="noopener noreferrer" für externen Link -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfA-R5qTa2p11NuFhvJJeKmcEE20UoE9ElbF9IE_5rZX0m3Q/viewform?fbzx=6203503894078438632&pli=1"
+                    target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;"
+                    data-i18n="contact.btn">Zum Bewerbungsformular</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-socials" style="margin-bottom: 1rem;">
+            <!-- SECURITY FIX: rel="noopener noreferrer" für alle target="_blank" Links -->
+            <a href="https://www.linkedin.com/in/mike-sen-gupta-a03741b/" target="_blank" rel="noopener noreferrer"
+                class="text-gold" style="font-size: 1.5rem; margin-right: 1rem;"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/coach_mike1980hh/" target="_blank" rel="noopener noreferrer"
+                class="text-gold" style="font-size: 1.5rem;"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2026 Mike Sengupta. <span data-i18n="footer.rights">Alle Rechte vorbehalten.</span> | <a
+                href="accessibility.html" style="text-decoration: underline;" data-i18n="a11y.link">Barrierefreiheit</a>
+                | <a href="datenschutz.html" style="text-decoration: underline;"
+                    data-i18n="footer.privacy">Datenschutz</a> | <a
+                href="#" id="imprint-toggle" style="text-decoration: underline;" data-i18n="footer.imprint">Impressum</a>
+        </p>
+    </footer>
+
+    <!-- Accessibility Panel Elements -->
+    <button id="a11y-toggle" class="a11y-toggle-btn" aria-label="Open Accessibility Menu" aria-expanded="false">
+        <i class="fa-solid fa-universal-access"></i>
+    </button>
+
+    <div id="a11y-panel" class="a11y-panel" aria-hidden="true" role="dialog" aria-labelledby="a11y-panel-title">
+        <div class="a11y-header">
+            <h3 id="a11y-panel-title" data-i18n="a11y.panel_title">Barrierefreiheit (A11Y)</h3>
+            <button id="a11y-close" aria-label="Close Accessibility Menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="a11y-options">
+            <button class="a11y-option-btn" id="a11y-hc" data-i18n="a11y.high_contrast"><i
+                    class="fa-solid fa-circle-half-stroke"></i> Hoher Kontrast</button>
+            <button class="a11y-option-btn" id="a11y-txt-up" data-i18n="a11y.text_up"><i
+                    class="fa-solid fa-text-height"></i> Text Vergrößern</button>
+            <button class="a11y-option-btn" id="a11y-txt-reset" data-i18n="a11y.text_reset"><i
+                    class="fa-solid fa-rotate-left"></i> Standard Text</button>
+            <button class="a11y-option-btn" id="a11y-dys" data-i18n="a11y.dyslexia"><i class="fa-solid fa-font"></i>
+                Lesefreundliche Schrift</button>
+            <button class="a11y-option-btn" id="a11y-anim" data-i18n="a11y.animations"><i class="fa-solid fa-ban"></i>
+                Animationen stoppen</button>
+        </div>
+    </div>
+
+    <!-- Impressum / Imprint Modal -->
+    <div id="imprint-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="imprint-title">
+        <div class="modal-overlay" tabindex="-1"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="imprint-title" data-i18n="imprint.title">Impressum</h3>
+                <button class="modal-close" id="imprint-close" aria-label="Impressum schließen"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="imprint-name">Mike Sen Gupta</p>
+                <p>Hildesheimer Weg 18</p>
+                <p>22459 Hamburg</p>
+                <div class="imprint-divider"></div>
+                <!-- SECURITY FIX: Kontaktdaten per JS zusammengesetzt – kein Klartext im DOM für Bot-Schutz -->
+                <p><strong><span data-i18n="imprint.mobile">Mobil</span>:</strong> <a id="imprint-tel" data-tel="+491796306300" href="#" aria-label="Telefonnummer laden"></a></p>
+                <p><strong><span data-i18n="imprint.email">E-Mail</span>:</strong> <a id="imprint-email" data-user="mike_sen_gupta" data-domain="gmx.de" href="#" aria-label="E-Mail laden"></a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECURITY FIX: tsParticles mit SRI-Hash -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"
+        integrity="sha384-gZSNMuUgSbqcltOBBRNXCH+szg+2C69ISFyCk2w+xsZc0iFU+bIVPfYPmLwLtNzz"
+        crossorigin="anonymous"></script>
+
+    <!-- Logic -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/a11y.js"></script>
+</body>
+
+</html>

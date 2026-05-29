@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Datenschutzerklärung / Privacy Policy - Mike Sengupta">
+    <title>Datenschutzerklärung | Mike Sengupta</title>
+    <!-- SECURITY FIX: localStorage-Wert validieren vor Verwendung -->
+    <script>
+        try {
+            const val = localStorage.getItem("a11y_large");
+            if (val === "true") {
+                document.documentElement.classList.add("a11y-large-text");
+            }
+        } catch (e) {}
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <!-- SECURITY FIX: FontAwesome mit SRI-Hash -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Skip to Content -->
+    <a href="#main-content" class="skip-link" data-i18n="a11y.skip">Zum Hauptinhalt springen</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">MIKE<span>SENGUPTA</span></a></div>
+        <nav role="navigation" aria-label="Main Navigation">
+            <ul class="nav-links">
+                <li><a href="index.html#about" data-i18n="nav.about">Über mich</a></li>
+                <li><a href="index.html#services" data-i18n="nav.services">Leistungen</a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact">Kontakt</a></li>
+
+                <li class="lang-switch">
+                    <span class="lang-lbl de">DE</span>
+                    <label class="switch">
+                        <input type="checkbox" id="lang-toggle" aria-label="Toggle Language">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="lang-lbl en">EN</span>
+                </li>
+            </ul>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main" style="padding-top: 7rem; min-height: 80vh;">
+        <section class="fade-in" style="padding: 4rem 10%;">
+            <h1 data-i18n="privacy.page_title">Datenschutzerklärung</h1>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);"
+               data-i18n="privacy.placeholder">
+                Diese Datenschutzerklärung wird demnächst vervollständigt.
+                Bitte nutze in der Zwischenzeit das Kontaktformular für Anfragen.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <p>&copy; 2026 Mike Sengupta. <span data-i18n="footer.rights">Alle Rechte vorbehalten.</span> | <a href="accessibility.html" style="text-decoration: underline;" data-i18n="a11y.link">Barrierefreiheit</a> | <a href="datenschutz.html" style="text-decoration: underline;" data-i18n="footer.privacy">Datenschutz</a> | <a href="#" id="imprint-toggle" style="text-decoration: underline;" data-i18n="footer.imprint">Impressum</a></p>
+    </footer>
+
+    <!-- Accessibility Panel Elements -->
+    <button id="a11y-toggle" class="a11y-toggle-btn" aria-label="Open Accessibility Menu" aria-expanded="false">
+        <i class="fa-solid fa-universal-access"></i>
+    </button>
+
+    <div id="a11y-panel" class="a11y-panel" aria-hidden="true" role="dialog" aria-labelledby="a11y-panel-title">
+        <div class="a11y-header">
+            <h3 id="a11y-panel-title" data-i18n="a11y.panel_title">Barrierefreiheit (A11Y)</h3>
+            <button id="a11y-close" aria-label="Close Accessibility Menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="a11y-options">
+            <button class="a11y-option-btn" id="a11y-hc" data-i18n="a11y.high_contrast"><i class="fa-solid fa-circle-half-stroke"></i> Hoher Kontrast</button>
+            <button class="a11y-option-btn" id="a11y-txt-up" data-i18n="a11y.text_up"><i class="fa-solid fa-text-height"></i> Text Vergrößern</button>
+            <button class="a11y-option-btn" id="a11y-txt-reset" data-i18n="a11y.text_reset"><i class="fa-solid fa-rotate-left"></i> Standard Text</button>
+            <button class="a11y-option-btn" id="a11y-dys" data-i18n="a11y.dyslexia"><i class="fa-solid fa-font"></i> Lesefreundliche Schrift</button>
+            <button class="a11y-option-btn" id="a11y-anim" data-i18n="a11y.animations"><i class="fa-solid fa-ban"></i> Animationen stoppen</button>
+        </div>
+    </div>
+
+    <!-- Impressum / Imprint Modal -->
+    <div id="imprint-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="imprint-title">
+        <div class="modal-overlay" tabindex="-1"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="imprint-title" data-i18n="imprint.title">Impressum</h3>
+                <button class="modal-close" id="imprint-close" aria-label="Impressum schließen"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="imprint-name">Mike Sen Gupta</p>
+                <p>Hildesheimer Weg 18</p>
+                <p>22459 Hamburg</p>
+                <div class="imprint-divider"></div>
+                <!-- SECURITY FIX: Kontaktdaten per JS zusammengesetzt – kein Klartext im DOM für Bot-Schutz -->
+                <p><strong><span data-i18n="imprint.mobile">Mobil</span>:</strong> <a id="imprint-tel" data-tel="+491796306300" href="#" aria-label="Telefonnummer laden"></a></p>
+                <p><strong><span data-i18n="imprint.email">E-Mail</span>:</strong> <a id="imprint-email" data-user="mike_sen_gupta" data-domain="gmx.de" href="#" aria-label="E-Mail laden"></a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logic -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/a11y.js"></script>
+</body>
+</html>

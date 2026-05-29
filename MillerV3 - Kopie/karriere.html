@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karriere – Miller & Co. GmbH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #0057d5;
+    --gold: var(--blue);
+    --gold-light: #2f7df0;
+    --dark: #ffffff;
+    --dark2: #f7faff;
+    --dark3: #eef4ff;
+    --steel: #dbe8fb;
+    --text: #243044;
+    --muted: #64748b;
+    --white: #0f172a;
+    --surface: #ffffff;
+    --line: rgba(0, 87, 213, 0.14);
+    --shadow: 0 20px 55px rgba(15, 23, 42, 0.09);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 87, 213,0.15);
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+    transition: all 0.3s;
+  }
+  .logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .logo-main { font-family: 'Times New Roman', Times, serif; font-size: 1.6rem; letter-spacing: 0.08em; color: var(--white); }
+  .logo-sub { font-family: 'Times New Roman', Times, serif; font-size: 0.65rem; letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase; margin-top: 1px; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: #475569; text-decoration: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta { background: var(--gold); color: var(--dark) !important; padding: 8px 22px; font-weight: 600 !important; letter-spacing: 0.1em; }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+
+  /* ─── SCROLL LINE ─── */
+  .scroll-line { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); z-index: 999; width: 0%; transition: width 0.1s; }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 7rem 7%; }
+  .section-tag { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; }
+  .section-tag span { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .section-tag::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: 0.04em; line-height: 1; color: var(--white); margin-bottom: 1.5rem; }
+  .section-title em { font-style: normal; color: var(--gold); }
+
+  /* ─── HERO ─── */
+  #hero {
+    height: 68vh;
+    min-height: 520px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 72px; /* Offset for navbar */
+    padding: 0 7%;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(105deg, rgba(255,255,255,0.96) 0%, rgba(247,250,255,0.76) 36%, rgba(255,255,255,0.18) 64%, rgba(0,87,213,0.08) 100%),
+      linear-gradient(180deg, rgba(0,87,213,0.04) 0%, rgba(0,87,213,0.14) 100%),
+      url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&q=80') center 42%/cover no-repeat;
+    filter: saturate(1.08) contrast(1.04);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 87, 213,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 87, 213,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative;
+    max-width: 900px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-tag span { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .hero-tag::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-title em { font-style: normal; color: var(--gold); }
+  .hero-sub {
+    margin-top: 1.8rem;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #475569;
+    max-width: 520px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.7s forwards;
+  }
+
+  /* ─── CAREER JOBS ─── */
+  #career-jobs { background: #ffffff; padding-top: 4rem; }
+  .job-card {
+    background: var(--surface);
+    border: 1px solid rgba(0,87,213,0.1);
+    box-shadow: var(--shadow);
+    padding: 3.5rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .job-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .job-card:hover {
+    background: #f8fbff;
+    border-color: rgba(0, 87, 213,0.24);
+    transform: translateY(-4px);
+  }
+  .job-card:hover::before { width: 8px; }
+  .job-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+  .job-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+  }
+  .job-intro {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(0,87,213,0.18);
+  }
+  .job-intro strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+  .job-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .job-section h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .job-section h4::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--gold);
+  }
+  .job-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .job-list li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .job-list li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 0.65rem;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .apply-box {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #eef4ff 0%, #ffffff 100%);
+    border: 1px solid rgba(0, 87, 213,0.2);
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .apply-box::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 87, 213,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .apply-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--white); margin-bottom: 1rem; letter-spacing: 0.05em; }
+  .apply-text { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; max-width: 600px; margin-inline: auto; }
+  .apply-info { font-size: 1.1rem; color: var(--text); line-height: 1.8; }
+  .apply-info span { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-right: 10px; }
+  .apply-info a { color: var(--gold); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .apply-info a:hover { color: var(--gold-light); text-decoration: underline; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #f8fbff;
+    border-top: 1px solid rgba(0,87,213,0.12);
+    padding: 2rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-copy { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── MODAL (IMPRESSUM) ─── */
+  .footer-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.2s;
+    text-transform: none;
+  }
+  .footer-btn:hover, .footer-btn:focus-visible { 
+    color: var(--gold); 
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+  }
+  .modal-dialog {
+    padding: 2.5rem;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 20px 55px rgba(15, 23, 42, 0.2);
+    background: var(--surface);
+    color: var(--text);
+    max-width: 600px;
+    width: 90%;
+    margin: auto;
+  }
+  .modal-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  .modal-dialog h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .modal-dialog p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .modal-dialog strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+  .modal-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0.2rem;
+  }
+  .modal-close-btn:hover, .modal-close-btn:focus-visible {
+    color: var(--gold);
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .job-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .job-card { padding: 2rem; }
+  }
+
+  /* ─── ACCESSIBILITY (A11Y) ─── */
+  .a11y-toggle-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--blue);
+    color: var(--surface);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 87, 213, 0.4);
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  .a11y-toggle-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--gold-light);
+  }
+  .a11y-panel {
+    position: fixed;
+    bottom: 6.5rem;
+    right: 2rem;
+    width: 320px;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.2);
+    z-index: 9999;
+    padding: 1.5rem;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border: 1px solid rgba(0,87,213,0.1);
+  }
+  .a11y-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .a11y-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(0,87,213,0.1);
+    padding-bottom: 0.8rem;
+  }
+  .a11y-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+  #a11y-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  #a11y-close:hover {
+    color: var(--gold);
+  }
+  .a11y-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .a11y-option-btn {
+    background: var(--dark2);
+    border: 1px solid rgba(0,87,213,0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .a11y-option-btn:hover {
+    background: var(--dark3);
+    border-color: rgba(0,87,213,0.3);
+  }
+  .a11y-option-btn.active {
+    background: var(--gold);
+    color: var(--surface);
+    border-color: var(--gold);
+  }
+  /* A11Y Helper Classes */
+  body.a11y-high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+  }
+  body.a11y-high-contrast * {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+  }
+  body.a11y-high-contrast img, body.a11y-high-contrast .hero-bg, body.a11y-high-contrast .industry-card-bg {
+    filter: contrast(120%) grayscale(100%) !important;
+  }
+  body.a11y-high-contrast .a11y-option-btn.active {
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  body.a11y-dyslexia-font, 
+  body.a11y-dyslexia-font *:not(i):not(.fa-solid):not(.logo-main):not(.logo-sub):not(.contact-reference-logo):not(.contact-reference-icon):not(.industry-icon):not(.process-icon):not(.contact-icon):not(.about-badge-num) {
+    font-family: "Comic Sans MS", "OpenDyslexic", sans-serif !important;
+    letter-spacing: 0.01em !important;
+    word-spacing: 0.03em !important;
+    line-height: 1.55 !important;
+  }
+  body.a11y-reduce-motion *,
+  body.a11y-reduce-motion *::before,
+  body.a11y-reduce-motion *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  @media (max-width: 600px) {
+    .a11y-panel {
+      right: 1rem;
+      left: 1rem;
+      width: auto;
+      bottom: 5.5rem;
+    }
+    .a11y-toggle-btn {
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="logo">
+    <span class="logo-main">Miller & Co.</span>
+    <span class="logo-sub">Werkzeugbau GmbH</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">Über uns</a></li>
+    <li><a href="index.html#industries">Branchen</a></li>
+    <li><a href="index.html#processes">Fertigung</a></li>
+    <li><a href="index.html#products">Produkte</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="karriere.html" style="color: var(--blue);">Karriere</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Anfrage stellen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><span>Wir suchen dich</span></div>
+    <h1 class="hero-title">Gestalte die<br><em>Zukunft</em> mit uns</h1>
+    <p class="hero-sub">Entdecke spannende Karrieremöglichkeiten in einem hochmodernen Arbeitsumfeld bei einem der führenden Experten für Formen- und Werkzeugbau.</p>
+  </div>
+</section>
+
+<!-- CAREER JOBS -->
+<section id="career-jobs">
+  <div class="section-tag"><span>Offene Stellen</span></div>
+  <h2 class="section-title">Werde Teil<br>unseres <em>Teams</em></h2>
+
+  <!-- Job 1: Ausbildung -->
+  <div class="job-card reveal">
+    <div class="job-subtitle">Ausbildung</div>
+    <h3 class="job-title">Auszubildender zum Feinwerkmechaniker (m/w/d)</h3>
+    <div class="job-intro">
+      <strong>Fachrichtung Formen- und Werkzeugbau.</strong><br><br>
+      Seit über 42 Jahren Ihr Profi für den FORMEN U. WERKZEUGBAU für die Automobil - Medizintechnik und Musikindustrie.<br>
+      Draht- und Senkerodieren & CNC- und 5 Achsen HSC-Fräsen.<br>
+      <em>Wir geben Ihrer Idee eine Form! Wir suchen per sofort eine engagierte Nachwuchskraft.</em>
+    </div>
+    
+    <div class="job-grid">
+      <div class="job-section">
+        <h4>Das erwartet dich bei uns</h4>
+        <ul class="job-list">
+          <li>Arbeit in einem hochmordernen Arbeitsumfeld an den neuesten Maschinen und mit innovativen Fertigungsmethoden</li>
+          <li>Teamarbeit, Zusammenarbeit und ein positives Arbeitsumfeld</li>
+          <li>attraktive Arbeitsbedingungen und die Möglichkeit zur beruflichen Weiterentwicklung</li>
+          <li>Leistungsprämien</li>
+          <li>Jobrad</li>
+        </ul>
+      </div>
+      <div class="job-section">
+        <h4>Deine Fähigkeiten</h4>
+        <ul class="job-list">
+          <li>Interesse an technischen Zusammenhängen und Abläufen</li>
+          <li>Spaß an der Arbeit mit Maschinen</li>
+          <li>Zuverlässigkeit, Kommunikationsstärke und Teamfähigkeit</li>
+        </ul>
+      </div>
+      <div class="job-section">
+        <h4>Aufgaben</h4>
+        <ul class="job-list">
+          <li>Be- und Verarbeitung von verschiedenen Werkstoffen (Metallen, Kunststoffen)</li>
+          <li>Umgang mit hochmodernen Maschinen (CNC-Bearbeitungszentren) und IT-Systemen</li>
+          <li>Herstellung von Neu- oder Einzelteilen mit spanenden Verfahren</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job 2: Werkzeugmacher -->
+  <div class="job-card reveal">
+    <div class="job-subtitle">Festanstellung</div>
+    <h3 class="job-title">Werkzeugmacher (Feinwerkmechaniker) (m/w/d)</h3>
+    <div class="job-intro">
+      <strong>Fachrichtung Formen und Werkzeugbau in Festanstellung.</strong><br><br>
+      Seit über 42 Jahren Ihr Profi für den FORMEN U. WERKZEUGBAU für die Automobil - Medizintechnik und Musikindustrie.<br>
+      Draht- und Senkerodieren & CNC- und 5 Achsen HSC-Fräsen.<br>
+      <em>Wir geben Ihrer Idee eine Form! Wir suchen per sofort erfahrene Fachkräfte.</em>
+    </div>
+    
+    <div class="job-grid">
+      <div class="job-section">
+        <h4>Das erwartet dich bei uns</h4>
+        <ul class="job-list">
+          <li>Arbeit in einem hochmordernen Arbeitsumfeld an den neuesten Maschinen und mit innovativen Fertigungsmethoden</li>
+          <li>betriebliche Altersvorsorge</li>
+          <li>13 Monatsgehälter</li>
+          <li>Teamarbeit, Zusammenarbeit und ein positives Arbeitsumfeld</li>
+          <li>attraktive Arbeitsbedingungen und die Möglichkeit zur beruflichen Weiterentwicklung</li>
+          <li>Leistungsprämien</li>
+          <li>Jobrad</li>
+        </ul>
+      </div>
+      <div class="job-section">
+        <h4>Deine Fähigkeiten</h4>
+        <ul class="job-list">
+          <li>Abgeschlossene Berufsausbildung</li>
+          <li>mind. dreijährige Berufspraxi</li>
+          <li>Kommunikationsstärke und Teamfähigkeit</li>
+          <li>CNC-Kenntnisse von Vorteil, aber nicht zwingend erforderlich</li>
+        </ul>
+      </div>
+      <div class="job-section">
+        <h4>Aufgaben</h4>
+        <ul class="job-list">
+          <li>Montage und Abschlussarbeiten an Neuwerkzeugen</li>
+          <li>Instandsetzung/Wartung von Werkzeugen (insbesondere auch Spritzgusswerkzeuge)</li>
+          <li>Herstellung von Neu- oder Einzelteilen mit spanenden Verfahren</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apply Section -->
+  <div class="apply-box reveal">
+    <h3 class="apply-title">Interesse geweckt?</h3>
+    <p class="apply-text">Wir freuen uns darauf, dich kennenzulernen. Bitte senden Sie Ihre aussagefähige Bewerbung an:</p>
+    <div class="apply-info">
+      <span>Adresse</span> Miller & Co. GmbH | Ossenpadd 20 · 25495 Kummerfeld<br><br>
+      <span>Telefon</span> <a href="tel:+494101585120">0 41 01 / 5 85 12-0</a><br><br>
+      <span>Fax</span> 0 41 01 / 5 85 12-29<br><br>
+      <span>E-Mail</span> <a href="mailto:info@miller-werkzeugbau.de">info@miller-werkzeugbau.de</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="logo-main" style="font-family:'Times New Roman', Times, serif; font-size:1.2rem; color:#0f172a; letter-spacing:0.06em;">Miller & Co. GmbH</div>
+    <div class="footer-copy" style="margin-top:4px;">© 2024 Miller Werkzeugbau · Alle Rechte vorbehalten</div>
+  </div>
+  <ul class="footer-links">
+    <li><button id="impressum-btn" class="footer-btn" aria-haspopup="dialog" aria-controls="impressum-dialog">Impressum</button></li>
+    <li><a href="#">Datenschutz</a></li>
+    <li><a href="index.html#contact">Kontakt</a></li>
+  </ul>
+</footer>
+
+<dialog id="impressum-dialog" class="modal-dialog" aria-labelledby="impressum-title">
+  <button id="impressum-close" class="modal-close-btn" aria-label="Schließen">&times;</button>
+  <h2 id="impressum-title">Impressum</h2>
+  <p><strong>Angaben gemäß §§ 5, 6 DDG:</strong></p>
+  <p>
+    Miller & Co GmbH<br>
+    Werkzeugbau<br>
+    Ossenpadd 20<br>
+    25495 Kummerfeld
+  </p>
+  <p>
+    <strong>Vertretungsberechtigter Geschäftsführer:</strong> Sven Jehne
+  </p>
+  <p>
+    <strong>Tel:</strong> 04101 / 5 85 12-0<br>
+    <strong>Fax:</strong> 04101 / 5 85 12-29<br>
+    <strong>E-Mail:</strong> <a href="mailto:info@miller-werkzeugbau.de" style="color:var(--gold);text-decoration:none;">info@miller-werkzeugbau.de</a>
+  </p>
+  <p>
+    <strong>Registergericht:</strong> Amtsgericht Pinneberg<br>
+    <strong>Registernummer:</strong> HRB9139 Pi
+  </p>
+  <p>
+    <strong>Umsatzsteuer-Identifikationsnummer gem. §27a UStG:</strong> DE 118608654
+  </p>
+  <p>
+    <strong>Inhaltlich Verantwortlicher:</strong> Sven Jehne (Anschrift s.o.)
+  </p>
+</dialog>
+
+<button id="a11y-toggle" class="a11y-toggle-btn" aria-label="Open Accessibility Menu" aria-expanded="false">
+    <i class="fa-solid fa-universal-access"></i>
+</button>
+
+<div id="a11y-panel" class="a11y-panel" aria-hidden="true" role="dialog" aria-labelledby="a11y-panel-title">
+    <div class="a11y-header">
+        <h3 id="a11y-panel-title" data-i18n="a11y.panel_title">Barrierefreiheit (A11Y)</h3>
+        <button id="a11y-close" aria-label="Close Accessibility Menu">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="a11y-options">
+        <button class="a11y-option-btn" id="a11y-hc" data-i18n="a11y.high_contrast">Hoher Kontrast</button>
+        <button class="a11y-option-btn" id="a11y-txt-up" data-i18n="a11y.text_up">Text Vergrößern</button>
+        <button class="a11y-option-btn" id="a11y-txt-reset" data-i18n="a11y.text_reset">Standard Text</button>
+        <button class="a11y-option-btn" id="a11y-dys" data-i18n="a11y.dyslexia">Lesefreundliche Schrift</button>
+        <button class="a11y-option-btn" id="a11y-anim" data-i18n="a11y.animations">Animationen stoppen</button>
+    </div>
+</div>
+
+<script>
+  // Scroll progress line
+  window.addEventListener('scroll', () => {
+    const progress = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('scrollLine').style.width = progress + '%';
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    observer.observe(el);
+  });
+
+  // Impressum Dialog
+  const impressumBtn = document.getElementById('impressum-btn');
+  const impressumDialog = document.getElementById('impressum-dialog');
+  const impressumClose = document.getElementById('impressum-close');
+
+  if (impressumBtn && impressumDialog && impressumClose) {
+    impressumBtn.addEventListener('click', () => {
+      impressumDialog.showModal();
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+
+    impressumClose.addEventListener('click', () => {
+      impressumDialog.close();
+      document.body.style.overflow = '';
+    });
+
+    impressumDialog.addEventListener('close', () => {
+      document.body.style.overflow = '';
+    });
+
+    impressumDialog.addEventListener('click', (e) => {
+      const dialogDimensions = impressumDialog.getBoundingClientRect();
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        impressumDialog.close();
+      }
+    });
+  }
+
+  // A11Y JS
+  const toggleBtn = document.getElementById('a11y-toggle');
+  const a11yPanel = document.getElementById('a11y-panel');
+  const a11yCloseBtn = document.getElementById('a11y-close');
+  
+  const hcBtn = document.getElementById('a11y-hc');
+  const txtUpBtn = document.getElementById('a11y-txt-up');
+  const txtResetBtn = document.getElementById('a11y-txt-reset');
+  const dysBtn = document.getElementById('a11y-dys');
+  const animBtn = document.getElementById('a11y-anim');
+
+  let a11yState = JSON.parse(localStorage.getItem('a11yState')) || {
+    highContrast: false,
+    textScale: 0,
+    dyslexia: false,
+    reduceMotion: false
+  };
+
+  function saveA11yState() {
+    localStorage.setItem('a11yState', JSON.stringify(a11yState));
+  }
+
+  function applyA11yState() {
+    if (a11yState.highContrast) {
+      document.body.classList.add('a11y-high-contrast');
+      hcBtn.classList.add('active');
+    } else {
+      document.body.classList.remove('a11y-high-contrast');
+      hcBtn.classList.remove('active');
+    }
+
+    if (a11yState.textScale > 0) {
+      document.documentElement.style.fontSize = (100 + a11yState.textScale * 10) + '%';
+      txtUpBtn.classList.add('active');
+    } else {
+      document.documentElement.style.fontSize = '100%';
+      txtUpBtn.classList.remove('active');
+    }
+
+    if (a11yState.dyslexia) {
+      document.body.classList.add('a11y-dyslexia-font');
+      dysBtn.classList.add('active');
+    } else {
+      document.body.classList.remove('a11y-dyslexia-font');
+      dysBtn.classList.remove('active');
+    }
+
+    if (a11yState.reduceMotion) {
+      document.body.classList.add('a11y-reduce-motion');
+      animBtn.classList.add('active');
+    } else {
+      document.body.classList.remove('a11y-reduce-motion');
+      animBtn.classList.remove('active');
+    }
+  }
+
+  function toggleA11yPanel(open) {
+    if (open) {
+      a11yPanel.classList.add('open');
+      a11yPanel.setAttribute('aria-hidden', 'false');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      a11yPanel.classList.remove('open');
+      a11yPanel.setAttribute('aria-hidden', 'true');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  if(toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = a11yPanel.classList.contains('open');
+      toggleA11yPanel(!isOpen);
+    });
+    a11yCloseBtn.addEventListener('click', () => toggleA11yPanel(false));
+
+    hcBtn.addEventListener('click', () => {
+      a11yState.highContrast = !a11yState.highContrast;
+      saveA11yState();
+      applyA11yState();
+    });
+
+    txtUpBtn.addEventListener('click', () => {
+      if (a11yState.textScale < 4) {
+        a11yState.textScale++;
+      }
+      saveA11yState();
+      applyA11yState();
+    });
+
+    txtResetBtn.addEventListener('click', () => {
+      a11yState.textScale = 0;
+      saveA11yState();
+      applyA11yState();
+    });
+
+    dysBtn.addEventListener('click', () => {
+      a11yState.dyslexia = !a11yState.dyslexia;
+      saveA11yState();
+      applyA11yState();
+    });
+
+    animBtn.addEventListener('click', () => {
+      a11yState.reduceMotion = !a11yState.reduceMotion;
+      saveA11yState();
+      applyA11yState();
+    });
+
+    applyA11yState();
+  }
+</script>
+</body>
+</html>

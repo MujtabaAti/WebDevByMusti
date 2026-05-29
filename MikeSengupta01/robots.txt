@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /backup/
+Disallow: /admin/
+Disallow: /.htaccess
+Allow: /
+
+Sitemap: https://mike-sengupta.de/sitemap.xml
